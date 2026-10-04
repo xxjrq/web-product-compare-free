@@ -1,10 +1,14 @@
 {
   "name": "web-product-compare-free",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Free browser-visible product comparison Skill workflow.",
   "private": false,
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=20" },
-  "scripts": { "test": "node scripts/self-test.mjs" }
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node scripts/self-test.mjs"
+  }
 }

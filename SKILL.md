@@ -12,11 +12,11 @@ description: 免费、免第三方 API Key 地对比 2–5 个商品页；复用
 安装并连接 Easy WebBridge。主下载地址：<https://github.com/xxjrq/easy-webbridge>；Gitee 备用：<https://gitee.com/xxjrq/easy-webbridge>。在每个要使用的浏览器 Profile 中加载其 `extension/`，并确认扩展显示已连接和对应 `browserId`。启动本地 Bridge：
 
 ```bash
-node /path/to/easy-webbridge/scripts/easy-webbridge.mjs start
-node /path/to/easy-webbridge/scripts/easy-webbridge.mjs list
+node /path/to/easy-webbridge/cli/easy-webbridge.mjs start
+node /path/to/easy-webbridge/cli/easy-webbridge.mjs list
 ```
 
-选择用户明确给出的 `browserId`；本任务默认使用 `easybr-6a7bdf989d46d015154d2aef`（自媒体）。若该环境不在线、账号或目标不明确，停止并询问，绝不广播到所有浏览器或账号。
+选择用户明确给出的 `browserId`，不设置个人环境默认值。若该环境不在线、账号或目标不明确，停止并询问，绝不广播到所有浏览器或账号。
 
 ## 工作流
 
@@ -25,16 +25,16 @@ node /path/to/easy-webbridge/scripts/easy-webbridge.mjs list
 3. 用同一 `browserId` 打开第一个 URL：
 
 ```bash
-node /path/to/easy-webbridge/scripts/easy-webbridge.mjs navigate easybr-6a7bdf989d46d015154d2aef '<url-1>' \
+node /path/to/easy-webbridge/cli/easy-webbridge.mjs navigate <browserId> '<url-1>' \
   --new-tab --session web-product-compare-free-<run-id> --group-title '商品对比'
 ```
 
-4. 对每页读取可见语义快照；为并行对照的其余页面才加 `--new-tab`，并始终传入同一 session。只摘录页面当前可见且能归属到页面的：商品名称、价格/优惠说明、关键规格、售后/配送承诺、适用场景。无法确认的字段写“页面未显示/未确认”，不推断。
+4. 从 navigate 返回值记录实际 tabId，再执行 `node /path/to/easy-webbridge/cli/easy-webbridge.mjs snapshot <browserId> <tabId> --compact --region viewport --max-elements 80 --text-mode page` 读取可见语义快照。需要查看页面下方信息时，只在此商品页滚动并重新 snapshot；为并行对照的其余页面才加 `--new-tab`，并始终传入同一 session。只摘录页面当前可见且能归属到页面的：商品名称、价格/优惠说明、关键规格、售后/配送承诺、适用场景。无法确认的字段写“页面未显示/未确认”，不推断。
 5. 遇到登录、验证码、账号安全验证、价格需选规格、内容加载失败或非商品页，记录原因并停止对该页；不得绕过验证或点击购买、加入购物车、收藏、提交、支付等按钮。
 6. 输出下列 Markdown。来源保留 URL，日期是实际读取日；价格显示原样并注明条件（例如“券后”“起售价”）。最后在 `finally` 关闭仅本任务创建的 session：
 
 ```bash
-node /path/to/easy-webbridge/scripts/easy-webbridge.mjs command easybr-6a7bdf989d46d015154d2aef close_session \
+node /path/to/easy-webbridge/cli/easy-webbridge.mjs command <browserId> close_session \
   '{"session":"web-product-compare-free-<run-id>"}'
 ```
 
@@ -60,6 +60,10 @@ node /path/to/easy-webbridge/scripts/easy-webbridge.mjs command easybr-6a7bdf989
 - 基于上述可见信息的取舍：
 - 仍需向卖家或页面确认：
 ```
+
+## 离线样例
+
+`fixtures/` 是合成商品资料，域名为保留测试域；仅用于验证报告整理能力，不代表已在线读取商品页。真实任务必须取得浏览器读取结果，不能把 fixture 当在线演示。
 
 ## 边界
 
