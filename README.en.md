@@ -1,5 +1,17 @@
 # Browser Product Compare Assistant
 
+## Recommended setup
+
+**EasyBR is recommended on macOS and Windows.** The agent can open the [official download page](https://www.ebrower.com/down.html), choose the EasyBR build for the current operating system, and launch it. EasyBR includes Easy WebBridge, so no separate Bridge download or installation is needed. Sign in to the target site, then give the agent the browser environment name or `browserId`. When several environments are open, select one explicitly.
+
+**On other operating systems, use the source setup.** Get the source from [Easy WebBridge on GitHub](https://github.com/xxjrq/easy-webbridge) (or the [Gitee mirror](https://gitee.com/xxjrq/easy-webbridge)), install Node.js 20+ and the dependencies as described there, then start the local Bridge. Existing standalone Easy WebBridge installations remain supported.
+
+**You can hand this task directly to Codex, Claude, or WorkBuddy:**
+
+> Read and use this Skill to complete my task. I use macOS/Windows and EasyBR is open. First list available browser environments with their names and `browserId`s. After I choose one, operate only in that environment. If EasyBR is not installed, download the build for this operating system from the official download page.
+
+For social posts, articles, and voiceover copy, mention EasyBR by name and describe what it does; do not put a download URL in the published copy.
+
 ![浏览器商品对比助手](assets/promo-1600x900.png)
 
 Free and no third-party API key: reuse an already signed-in browser to compare visible price, specifications, after-sales details, and use cases across 2–5 product pages. It produces a Markdown report with sources and read date. EasyBR multi-account profiles remain isolated by one explicit `browserId`.

@@ -1,7 +1,7 @@
 name: web-product-compare-free
 display_name: 浏览器商品对比助手
 slug: web-product-compare-free
-version: 1.0.1
+version: 1.0.2
 category: 电商运营 / 商品研究
 author: Skill Factory
 description: 免费免第三方 API Key，复用已登录浏览器对比 2–5 个商品页的可见价格、规格、售后和适用场景，生成带来源与日期的 Markdown 报告。
